@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JSP登录成功及注销 | Hexo</title>
+  <title>JSP登录流程梳理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JSP登录成功及注销//登录成功response.sendRedirect(“/success.jsp”); &amp;lt;%@ page language=&amp;quot;java&amp;quot; contentType=&amp;quot;text/html; charset=UTF-8&amp;quot; pageEncoding=&amp;quot;UTF-8&amp;quot;%&amp;gt; &amp;lt;!DOCTYPE html PUBL">
+  <meta name="description" content="JSP登录1.表单提交数据到Servlet的方式整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。 (1)Servlet中的doPost()方法： A.用Request.getParameter(&amp;quot;[input标签的name属性名]&amp;quot;)方法获取登录页面提交过来的表单数据。 B.通过sql的JDB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JSP登录成功及注销">
-<meta property="og:url" content="http://yoursite.com/2019/11/20/JSP登录成功及注销/index.html">
+<meta property="og:title" content="JSP登录流程梳理">
+<meta property="og:url" content="http://yoursite.com/2019/11/21/JSP登录流程梳理/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JSP登录成功及注销//登录成功response.sendRedirect(“/success.jsp”); &amp;lt;%@ page language=&amp;quot;java&amp;quot; contentType=&amp;quot;text/html; charset=UTF-8&amp;quot; pageEncoding=&amp;quot;UTF-8&amp;quot;%&amp;gt; &amp;lt;!DOCTYPE html PUBL">
+<meta property="og:description" content="JSP登录1.表单提交数据到Servlet的方式整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。 (1)Servlet中的doPost()方法： A.用Request.getParameter(&amp;quot;[input标签的name属性名]&amp;quot;)方法获取登录页面提交过来的表单数据。 B.通过sql的JDB">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-20T11:21:58.683Z">
+<meta property="og:updated_time" content="2019-11-21T13:20:01.060Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSP登录成功及注销">
-<meta name="twitter:description" content="JSP登录成功及注销//登录成功response.sendRedirect(“/success.jsp”); &amp;lt;%@ page language=&amp;quot;java&amp;quot; contentType=&amp;quot;text/html; charset=UTF-8&amp;quot; pageEncoding=&amp;quot;UTF-8&amp;quot;%&amp;gt; &amp;lt;!DOCTYPE html PUBL">
+<meta name="twitter:title" content="JSP登录流程梳理">
+<meta name="twitter:description" content="JSP登录1.表单提交数据到Servlet的方式整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。 (1)Servlet中的doPost()方法： A.用Request.getParameter(&amp;quot;[input标签的name属性名]&amp;quot;)方法获取登录页面提交过来的表单数据。 B.通过sql的JDB">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,77 +154,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JSP登录成功及注销" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JSP登录流程梳理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JSP登录成功及注销
+      JSP登录流程梳理
     </h1>
   
 
         
-        <a href="/2019/11/20/JSP登录成功及注销/" class="archive-article-date">
-  	<time datetime="2019-11-20T11:17:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
+        <a href="/2019/11/21/JSP登录流程梳理/" class="archive-article-date">
+  	<time datetime="2019-11-21T13:17:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="JSP登录成功及注销"><a href="#JSP登录成功及注销" class="headerlink" title="JSP登录成功及注销"></a>JSP登录成功及注销</h2><p>//登录成功<br>response.sendRedirect(“/success.jsp”);</p>
-<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
-&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
-&lt;title&gt;欢迎页面&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;%
-//从Request获取id、pwd、name的值
-String id= request.getParameter(&quot;id&quot;);
-String pwd= request.getParameter(&quot;pwd&quot;);
-String name= request.getParamete(&quot;name&quot;);
-//获取Session对象
-String path = request.getContextPath();
-HttpSession session=request.getSession();
-//向Session对象内放属性
-session.setAttribute(&quot;id&quot;, id);
-session.setAttribute(&quot;pwd&quot;, pwd);
-session.setAttribute(&quot;name&quot;, name);
-//页面输出
-out.println(&quot;&lt;span&gt;欢迎&quot;+name+&quot;登录&lt;/span&gt;&quot;);  
-//注销链接
-&lt;a href=&quot;out.jsp&quot;&gt;注销&lt;/a&gt;
-%&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre><p>注销页面(out.jsp)如下：</p>
-<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
-&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
-&lt;title&gt;Insert title here&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;%
-//获取Session对象
-String path = request.getContextPath();
-HttpSession session=request.getSession();
-//清空Session中的登录信息相关属性
-    session.removeAttribute(&quot;id&quot;);
-    session.removeAttribute(&quot;pwd&quot;);
-    session.removeAttribute(&quot;name&quot;);
-//上下文路径
-String path = request.getContextPath();
-//重定向到首页(未登录状态)
-response.sendRedirect(path+&quot;/index.jsp&quot;);
-%&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+        <h2 id="JSP登录"><a href="#JSP登录" class="headerlink" title="JSP登录"></a>JSP登录</h2><h3 id="1-表单提交数据到Servlet的方式"><a href="#1-表单提交数据到Servlet的方式" class="headerlink" title="1.表单提交数据到Servlet的方式"></a>1.表单提交数据到Servlet的方式</h3><p>整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。</p>
+<p>(1)Servlet中的doPost()方法：</p>
+<pre><code>A.用Request.getParameter(&quot;[input标签的name属性名]&quot;)方法获取登录页面提交过来的表单数据。
+B.通过sql的JDBC的Jar包导入，进行数据库连接(连接代码见以往的连接代码)，用sql(类似于select * from user where id =&apos;&apos;, pwd=&apos;&apos;;)查询语句。
+C.比对判定以上两项的数据，页面跳转(&quot;转发&quot;和&quot;重定向&quot;两种方式取其一)。</code></pre><p>(2)跳转到的页面：登录成功页面(在Session中保存用户信息)/不跳转</p>
+<h3 id="2-表单提交数据到JSP的方式"><a href="#2-表单提交数据到JSP的方式" class="headerlink" title="2.表单提交数据到JSP的方式"></a>2.表单提交数据到JSP的方式</h3><p>整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个JSP，在其内进行判定是否登录。</p>
+<p>(1)JSP中的&lt;% %&gt;脚本内容：</p>
+<pre><code>A.用Request.getParameter(&quot;[input标签的name属性名]&quot;)方法获取登录页面提交过来的表单数据。
+B.通过sql的JDBC的Jar包导入，进行数据库连接(连接代码见以往的连接代码)，用sql(类似于select * from user where id =&apos;&apos;, pwd=&apos;&apos;;)查询语句。
+C.比对判定以上两项的数据，页面跳转(&quot;转发&quot;和&quot;重定向&quot;两种方式取其一)。</code></pre><p>(2)跳转到的页面：登录成功页面(在Session中保存用户信息)/重定向到登录JSP页面，为地址栏添加一个属性(response.sendRedirect(“index.jsp?info=”登录失败”))</p>
+
       
 
       
@@ -303,7 +263,7 @@ response.sendRedirect(path+&quot;/index.jsp&quot;);
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/20/JSP登录成功及注销/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/21/JSP登录流程梳理/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -317,18 +277,9 @@ response.sendRedirect(path+&quot;/index.jsp&quot;);
   
 <nav id="article-nav">
   
-    <a href="/2019/11/21/JSP登录流程梳理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JSP登录流程梳理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/11/百度搜索关键词技巧/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">百度搜索关键词技巧</div>
+    <a href="/2019/11/20/JSP登录成功及注销/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JSP登录成功及注销</div>
       <i class="icon-circle-right"></i>
     </a>
   
