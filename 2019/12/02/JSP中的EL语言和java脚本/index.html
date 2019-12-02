@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JSP登录流程梳理 | Hexo</title>
+  <title>JSP中的EL语言和java脚本 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JSP登录1.表单提交数据到Servlet的方式整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。 (1)Servlet中的doPost()方法： A.用Request.getParameter(&amp;quot;[input标签的name属性名]&amp;quot;)方法获取登录页面提交过来的表单数据。 B.通过sql的JDB">
+  <meta name="description" content="JSP中的EL语言和java脚本：demo1127项目，登录后Session对象是有username （1）login.jsp-&amp;gt;servlet(LoginAction.java)-&amp;gt;welcome.jsp &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;欢迎页面&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt; &amp;lt;p&amp;gt;欢迎${userna">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JSP登录流程梳理">
-<meta property="og:url" content="http://yoursite.com/2019/11/21/JSP登录流程梳理/index.html">
+<meta property="og:title" content="JSP中的EL语言和java脚本">
+<meta property="og:url" content="http://yoursite.com/2019/12/02/JSP中的EL语言和java脚本/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JSP登录1.表单提交数据到Servlet的方式整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。 (1)Servlet中的doPost()方法： A.用Request.getParameter(&amp;quot;[input标签的name属性名]&amp;quot;)方法获取登录页面提交过来的表单数据。 B.通过sql的JDB">
+<meta property="og:description" content="JSP中的EL语言和java脚本：demo1127项目，登录后Session对象是有username （1）login.jsp-&amp;gt;servlet(LoginAction.java)-&amp;gt;welcome.jsp &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;欢迎页面&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt; &amp;lt;p&amp;gt;欢迎${userna">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-21T13:20:01.060Z">
+<meta property="og:updated_time" content="2019-12-02T10:22:50.201Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSP登录流程梳理">
-<meta name="twitter:description" content="JSP登录1.表单提交数据到Servlet的方式整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。 (1)Servlet中的doPost()方法： A.用Request.getParameter(&amp;quot;[input标签的name属性名]&amp;quot;)方法获取登录页面提交过来的表单数据。 B.通过sql的JDB">
+<meta name="twitter:title" content="JSP中的EL语言和java脚本">
+<meta name="twitter:description" content="JSP中的EL语言和java脚本：demo1127项目，登录后Session对象是有username （1）login.jsp-&amp;gt;servlet(LoginAction.java)-&amp;gt;welcome.jsp &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;欢迎页面&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt; &amp;lt;p&amp;gt;欢迎${userna">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,36 +154,53 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JSP登录流程梳理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JSP中的EL语言和java脚本" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JSP登录流程梳理
+      JSP中的EL语言和java脚本
     </h1>
   
 
         
-        <a href="/2019/11/21/JSP登录流程梳理/" class="archive-article-date">
-  	<time datetime="2019-11-21T13:17:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
+        <a href="/2019/12/02/JSP中的EL语言和java脚本/" class="archive-article-date">
+  	<time datetime="2019-12-02T10:20:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="JSP登录"><a href="#JSP登录" class="headerlink" title="JSP登录"></a>JSP登录</h2><h3 id="1-表单提交数据到Servlet的方式"><a href="#1-表单提交数据到Servlet的方式" class="headerlink" title="1.表单提交数据到Servlet的方式"></a>1.表单提交数据到Servlet的方式</h3><p>整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个Servlet，在其内进行判定是否登录。</p>
-<p>(1)Servlet中的doPost()方法：</p>
-<pre><code>A.用Request.getParameter(&quot;[input标签的name属性名]&quot;)方法获取登录页面提交过来的表单数据。
-B.通过sql的JDBC的Jar包导入，进行数据库连接(连接代码见以往的连接代码)，用sql(类似于select * from user where id =&apos;&apos;, pwd=&apos;&apos;;)查询语句。
-C.比对判定以上两项的数据，页面跳转(&quot;转发&quot;和&quot;重定向&quot;两种方式取其一)。</code></pre><p>(2)跳转到的页面：登录成功页面(在Session中保存用户信息)/不跳转</p>
-<h3 id="2-表单提交数据到JSP的方式"><a href="#2-表单提交数据到JSP的方式" class="headerlink" title="2.表单提交数据到JSP的方式"></a>2.表单提交数据到JSP的方式</h3><p>整体流程：登录页面提交form表单(get或post方式到action指定的位置)的数据到一个JSP，在其内进行判定是否登录。</p>
-<p>(1)JSP中的&lt;% %&gt;脚本内容：</p>
-<pre><code>A.用Request.getParameter(&quot;[input标签的name属性名]&quot;)方法获取登录页面提交过来的表单数据。
-B.通过sql的JDBC的Jar包导入，进行数据库连接(连接代码见以往的连接代码)，用sql(类似于select * from user where id =&apos;&apos;, pwd=&apos;&apos;;)查询语句。
-C.比对判定以上两项的数据，页面跳转(&quot;转发&quot;和&quot;重定向&quot;两种方式取其一)。</code></pre><p>(2)跳转到的页面：登录成功页面(在Session中保存用户信息)/重定向到登录JSP页面，为地址栏添加一个属性(response.sendRedirect(“index.jsp?info=”登录失败”))</p>
+        <h2 id="JSP中的EL语言和java脚本："><a href="#JSP中的EL语言和java脚本：" class="headerlink" title="JSP中的EL语言和java脚本："></a>JSP中的EL语言和java脚本：</h2><p>demo1127项目，登录后Session对象是有username</p>
+<p>（1）login.jsp-&gt;servlet(LoginAction.java)-&gt;welcome.jsp</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;欢迎页面&lt;/title&gt;&lt;/head&gt;
+&lt;p&gt;欢迎${username}登录&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>page-request-session-application</p>
+<p>（2）login.jsp-&gt;servlet(LoginAction.java)-&gt;welcome.jsp</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;欢迎页面&lt;/title&gt;&lt;/head&gt;
+&lt;p&gt;欢迎&lt;%=Session.getAttribute(&quot;username&quot;)%&gt;登录&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p> (3)</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;欢迎页面&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;% out.print(&quot;&lt;p&gt;欢迎+&quot;Session.getAttribute(&quot;username&quot;)&quot;+登录&lt;/p&gt;&quot;);%&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>${}方式：“自动从内置对象中查找值”</p>
+<p>&lt;%=%&gt;方式：“须明确指定从哪个对象里取值”</p>
+<p>例 &lt;%=x%&gt; 取当前页面的x 值</p>
+<p>&lt;%=request.getAttrbutr(“x”)%&gt;取request中的x值</p>
+<p>${x}首先从当前页面找有没有x，有就显示它，没有，查找request，再没有就查找session，再没有就查找application再就有，就没办法了，输出空值。</p>
+<p>&lt;%=x%&gt;如果x不存在，会报错。</p>
+<p>${x}就算x不存在，也不会报错。</p>
 
       
 
@@ -263,7 +280,7 @@ C.比对判定以上两项的数据，页面跳转(&quot;转发&quot;和&quot;�
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/21/JSP登录流程梳理/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/02/JSP中的EL语言和java脚本/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -277,18 +294,9 @@ C.比对判定以上两项的数据，页面跳转(&quot;转发&quot;和&quot;�
   
 <nav id="article-nav">
   
-    <a href="/2019/12/02/JSP中的EL语言和java脚本/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JSP中的EL语言和java脚本
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/20/JSP登录成功及注销/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JSP登录成功及注销</div>
+    <a href="/2019/11/21/JSP登录流程梳理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JSP登录流程梳理</div>
       <i class="icon-circle-right"></i>
     </a>
   
